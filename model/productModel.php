@@ -55,6 +55,13 @@
         include_once('connect/closeDB.php');
 
     }
+    function destroy(){
+        $id = $_GET['id'];
+        include_once 'connect/openDB.php';
+        $sql = "DELETE FROM products WHERE product_id = '$id'";
+        mysqli_query($conn, $sql);
+        include_once 'connect/openDB.php';
+    }
 
 switch ($action){
     case '':
@@ -67,6 +74,10 @@ switch ($action){
     case 'store':
         storeProduct();
         break;
+    case 'destroy':
+        destroy();
+        break;
+
 
 }
 

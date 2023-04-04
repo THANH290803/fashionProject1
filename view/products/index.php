@@ -30,36 +30,30 @@
                             <div class="table-responsive"><!-- table-responsive begin -->
                                 <table class="table table-striped table-bordered table-hover"><!-- table table-striped table-bordered table-hover begin -->
 
-                                    <thead><!-- thead begin -->
+
                                     <tr><!-- tr begin -->
                                         <th> Product ID: </th>
                                         <th> Product Title: </th>
                                         <th> Product Image: </th>
                                         <th> Product Price: </th>
-                                        <th> Product Sold: </th>
                                         <th> Product Keywords: </th>
                                         <th> Product Date: </th>
                                         <th> Product Edit: </th>
                                         <th> Product Delete: </th>
                                     </tr><!-- tr finish -->
-                                    </thead><!-- thead finish -->
 
-                                    <tbody><!-- tbody begin -->
-
-
-
+                                    <?php foreach ($products as $product){
+                                    ?>
                                     <tr><!-- tr begin -->
-                                        <td>  </td>
-                                        <td>  </td>
-                                        <td> </td>
-                                        <td>  </td>
-                                        <td>
-                                        </td>
-                                        <td>  </td>
-                                        <td>  </td>
+                                        <td><?= $product['product_id'] ?> </td>
+                                        <td> <?= $product['product_title'] ?> </td>
+                                        <td> <?= $product['product_img1'] ?> </td>
+                                        <td> <?= $product['product_price'] ?> </td>
+                                        <td><?= $product['product_keywords'] ?></td>
+                                        <td> <?= $product['date'] ?> </td>
                                         <td>
 
-                                            <a href="">
+                                            <a href="index.php?controller=product&action=edit&id=<?= $product['product_id'] ?>">
 
                                                 <i class="fa fa-pencil"></i> Edit
 
@@ -68,7 +62,7 @@
                                         </td>
                                         <td>
 
-                                            <a href="">
+                                            <a href="index.php?controller=product&action=destroy&id=<?= $product['product_id'] ?>">
 
                                                 <i class="fa fa-trash-o"></i> Delete
 
@@ -77,9 +71,9 @@
                                         </td>
                                     </tr><!-- tr finish -->
 
-
-
-                                    </tbody><!-- tbody finish -->
+                                    <?php
+                                            }
+                                    ?>
 
                                 </table><!-- table table-striped table-bordered table-hover finish -->
                             </div><!-- table-responsive finish -->

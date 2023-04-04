@@ -97,7 +97,7 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse"><!-- collapse navbar-collapse navbar-ex1-collapse begin -->
             <ul class="nav navbar-nav side-nav"><!-- nav navbar-nav side-nav begin -->
                 <li><!-- li begin -->
-                    <a href="index.php?dashboard"><!-- a href begin -->
+                    <a href="home.php?dashboard"><!-- a href begin -->
 
                         <i class="fa fa-fw fa-dashboard"></i> Dashboard
 

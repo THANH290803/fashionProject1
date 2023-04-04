@@ -20,5 +20,23 @@
             include_once 'model/productModel.php';
             header('Location:index.php?controller=product&action=create');
             break;
+        case 'edit':
+            //Lấy dữ liệu của bản ghi đang được sửa
+            include_once 'model/productModel.php';
+            //Hiển thị ra form để sửa
+            include_once 'view/products/edit_product.php';
+            break;
+        case 'update':
+            //Sửa dữ liệu trên DB
+            include_once 'model/productModel.php';
+//            Quay về trang danh sách
+            header('Location:index.php?controller=product');
+            break;
+        case 'destroy':
+//            Xóa dữ liệu trên db
+            include_once 'model/productModel.php';
+//            Quay về trang danh sách
+            header('Location:index.php?controller=product');
+            break;
     }
 ?>

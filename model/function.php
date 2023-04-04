@@ -644,7 +644,7 @@ function register(){
 
         $c_ip = getRealIpUser();
 
-        move_uploaded_file($c_image_tmp,"customer/customer_images/$c_image");
+        move_uploaded_file($c_image_tmp,"customer_images/$c_image");
 
         $insert_customer = "insert into customers (customer_name,customer_email,customer_pass,customer_country,customer_city,customer_contact,customer_address,customer_image,customer_ip) values ('$c_name','$c_email','$c_pass','$c_country','$c_city','$c_contact','$c_address','$c_image','$c_ip')";
 

@@ -11,7 +11,7 @@ include("includes/header.php");
 
             <ul class="breadcrumb"><!-- breadcrumb Begin -->
                 <li>
-                    <a href="index.php">Home</a>
+                    <a href="home.php">Home</a>
                 </li>
                 <li>
                     Register

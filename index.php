@@ -15,6 +15,12 @@
         case 'category':
             include_once 'controllers/categoriesController.php';
             break;
+        case 'productCategory':
+            include_once 'controllers/product_categoriesController.php';
+            break;
+        case 'slide':
+            include_once 'controllers/slideController.php';
+            break;
         case 'function':
             include_once 'controllers/functionController.php';
             break;

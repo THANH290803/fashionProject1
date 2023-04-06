@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="view/styles/bootstrap-337.min.css">
     <link rel="stylesheet" href="view/font-awsome/css/font-awesome.min.css">
     <link rel="stylesheet" href="view/styles/style1.css">
+    <link rel="stylesheet" href="view/styles/style2.css">
 </head>
 <body>
 
@@ -134,10 +135,10 @@
 
                     <ul id="p_cat" class="collapse"><!-- collapse begin -->
                         <li><!-- li begin -->
-                            <a href="index.php?insert_p_cat"> Insert Product Category </a>
+                            <a href="index.php?controller=productCategory&action=create"> Insert Product Category </a>
                         </li><!-- li finish -->
                         <li><!-- li begin -->
-                            <a href="index.php?view_p_cats"> View Products Categories </a>
+                            <a href="index.php?controller=productCategory"> View Products Categories </a>
                         </li><!-- li finish -->
                     </ul><!-- collapse finish -->
 
@@ -153,10 +154,10 @@
 
                     <ul id="cat" class="collapse"><!-- collapse begin -->
                         <li><!-- li begin -->
-                            <a href="index.php?insert_cat"> Insert Category </a>
+                            <a href="index.php?controller=category&action=create"> Insert Category </a>
                         </li><!-- li finish -->
                         <li><!-- li begin -->
-                            <a href="index.php?view_cats"> View Categories </a>
+                            <a href="index.php?controller=category"> View Categories </a>
                         </li><!-- li finish -->
                     </ul><!-- collapse finish -->
 
@@ -172,10 +173,10 @@
 
                     <ul id="slides" class="collapse"><!-- collapse begin -->
                         <li><!-- li begin -->
-                            <a href="index.php?insert_slide"> Insert Slide </a>
+                            <a href="index.php?controller=slide&action=create"> Insert Slide </a>
                         </li><!-- li finish -->
                         <li><!-- li begin -->
-                            <a href="index.php?view_slides"> View Slides </a>
+                            <a href="index.php?controller=slide"> View Slides </a>
                         </li><!-- li finish -->
                     </ul><!-- collapse finish -->
 

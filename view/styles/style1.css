@@ -160,6 +160,10 @@ body{
     border-radius: 5px;
 }
 
+.panel-body .table-responsive table tr th img{
+    height: 25px;
+}
+
 .thumb-info{
     position: relative;
 }

@@ -10,6 +10,7 @@
 <body>
     <a href="index.php?controller=product">Products</a>
     <a href="index.php?controller=category">Category</a>
+    <a href="index.php?controller=productCategory">Product Category</a>
     <a href="index.php?controller=function">Function</a>
     <a href="index.php?controller=login">Login</a>
 </body>

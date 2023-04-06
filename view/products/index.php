@@ -28,6 +28,14 @@
 
                         <div class="panel-body"><!-- panel-body begin -->
                             <div class="table-responsive"><!-- table-responsive begin -->
+                                <div class="wrap">
+                                    <form method="post" action="index.php?controller=product" class="search">
+                                        <input type="text" name="search" value="<?= $array['search'] ?>" class="searchTerm">
+
+                                        <button class="searchButton"><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div>
+
                                 <table class="table table-striped table-bordered table-hover"><!-- table table-striped table-bordered table-hover begin -->
 
 
@@ -42,12 +50,15 @@
                                         <th> Product Delete: </th>
                                     </tr><!-- tr finish -->
 
-                                    <?php foreach ($products as $product){
+                                    <?php
+
+                                    foreach ($array['products'] as $product){
+
                                     ?>
                                     <tr><!-- tr begin -->
                                         <td><?= $product['product_id'] ?> </td>
                                         <td> <?= $product['product_title'] ?> </td>
-                                        <td> <?= $product['product_img1'] ?> </td>
+                                        <td> <img style="height: 100px" src="view/product_images/<?= $product['product_img1'] ?>"></td>
                                         <td> <?= $product['product_price'] ?> </td>
                                         <td><?= $product['product_keywords'] ?></td>
                                         <td> <?= $product['date'] ?> </td>
@@ -76,6 +87,21 @@
                                     ?>
 
                                 </table><!-- table table-striped table-bordered table-hover finish -->
+
+                                <?php
+                                for($i = 1; $i <= $array['page']; $i++){
+                                    ?>
+                                    <form class="pagination" method="post" action="index.php?controller=product">
+                                        <input type="hidden" name="search" value="<?= $array['search'] ?>">
+                                        <input type="hidden" name="page" value="<?= $i ?>">
+                                        <button class="active">
+                                            <?= $i ?>
+                                        </button>
+                                    </form>
+                                <?php
+                                }
+                                ?>
+
                             </div><!-- table-responsive finish -->
                         </div><!-- panel-body finish -->
 

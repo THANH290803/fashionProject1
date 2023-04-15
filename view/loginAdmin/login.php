@@ -5,22 +5,22 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../styles/styleAdmin.css">
+    <link rel="stylesheet" href="view/styles/styleAdmin.css">
     <title>Login</title>
 </head>
 <body>
 <div class="container">
     <div class="screen">
         <div class="screen__content">
-            <form class="login">
+            <form class="login" action="index.php?controller=login&action=loginProcess" method="post">
                 <h1>Login Admin</h1>
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input type="text" class="login__input" placeholder="User name / Email">
+                    <input type="email" class="login__input" placeholder="User name / Email" name="admin_email">
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-lock"></i>
-                    <input type="password" class="login__input" placeholder="Password">
+                    <input type="password" class="login__input" placeholder="Password" name="admin_password">
                 </div>
                 <button class="button login__submit">
                     <span class="button__text">Log In Now</span>

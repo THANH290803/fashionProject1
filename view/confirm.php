@@ -6,18 +6,9 @@ if(!isset($_SESSION['customer_email'])){
 
     echo "<script>window.open('checkout.php','_self')</script>";
 
-}else{
+}
 
-    include("../connect/openDB.php");
-    include("../model/function.php");
-
-    if(isset($_GET['order_id'])){
-
-        $order_id = $_GET['order_id'];
-
-    }
-
-    ?>
+?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -68,7 +59,7 @@ if(!isset($_SESSION['customer_email'])){
                         <a href="my_account.php">My Account</a>
                     </li>
                     <li>
-                        <a href="cart.php">Go To Cart</a>
+                        <a href="cart/cart.php">Go To Cart</a>
                     </li>
                     <li>
                         <a href="checkout.php">
@@ -84,6 +75,7 @@ if(!isset($_SESSION['customer_email'])){
                                 echo " <a href='logout.php'> Log Out </a> ";
 
                             }
+
 
                             ?>
 
@@ -145,7 +137,7 @@ if(!isset($_SESSION['customer_email'])){
                             <a href="my_account.php">My Account</a>
                         </li>
                         <li>
-                            <a href="cart.php">Shopping Cart</a>
+                            <a href="cart/cart.php">Shopping Cart</a>
                         </li>
                         <li>
                             <a href="contact.php">Contact Us</a>
@@ -155,7 +147,7 @@ if(!isset($_SESSION['customer_email'])){
 
                 </div><!-- padding-nav Finish -->
 
-                <a href="cart.php" class="btn navbar-btn btn-primary right"><!-- btn navbar-btn btn-primary Begin -->
+                <a href="cart/cart.php" class="btn navbar-btn btn-primary right"><!-- btn navbar-btn btn-primary Begin -->
 
                     <i class="fa fa-shopping-cart"></i>
 
@@ -236,7 +228,7 @@ if(!isset($_SESSION['customer_email'])){
 
                     <h1 align="center"> Please confirm your payment</h1>
 
-                    <form action="confirm.php?update_id=<?php echo $order_id;  ?>" method="post" enctype="multipart/form-data"><!-- form Begin -->
+                    <form action="confirm.php?update_id=" method="post" enctype="multipart/form-data"><!-- form Begin -->
 
                         <div class="form-group"><!-- form-group Begin -->
 
@@ -297,48 +289,48 @@ if(!isset($_SESSION['customer_email'])){
 
                     </form><!-- form Finish -->
 
-                    <?php
-
-                    if(isset($_POST['confirm_payment'])){
-
-                        $update_id = $_GET['update_id'];
-
-                        $invoice_no = $_POST['invoice_no'];
-
-                        $amount = $_POST['amount_sent'];
-
-                        $payment_mode = $_POST['payment_mode'];
-
-                        $ref_no = $_POST['ref_no'];
-
-
-                        $payment_date = $_POST['date'];
-
-                        $complete = "Complete";
-
-                        $insert_payment = "insert into payments (invoice_no,amount,payment_mode,ref_no,payment_date) values ('$invoice_no','$amount','$payment_mode','$ref_no','$payment_date')";
-
-                        $run_payment = mysqli_query($conn,$insert_payment);
-
-                        $update_customer_order = "update customer_orders set order_status='$complete' where order_id='$update_id'";
-
-                        $run_customer_order = mysqli_query($conn,$update_customer_order);
-
-                        $update_pending_order = "update pending_orders set order_status='$complete' where order_id='$update_id'";
-
-                        $run_pending_order = mysqli_query($conn,$update_pending_order);
-
-                        if($run_pending_order){
-
-                            echo "<script>alert('Thank You for purchasing, your orders will be completed within 24 hours work')</script>";
-
-                            echo "<script>window.open('my_account.php?my_orders','_self')</script>";
-
-                        }
-
-                    }
-
-                    ?>
+<!--                    --><?php
+//
+//                    if(isset($_POST['confirm_payment'])){
+//
+//                        $update_id = $_GET['update_id'];
+//
+//                        $invoice_no = $_POST['invoice_no'];
+//
+//                        $amount = $_POST['amount_sent'];
+//
+//                        $payment_mode = $_POST['payment_mode'];
+//
+//                        $ref_no = $_POST['ref_no'];
+//
+//
+//                        $payment_date = $_POST['date'];
+//
+//                        $complete = "Complete";
+//
+//                         = "insert into payments (invoice_no,amount,payment_mode,ref_no,payment_date) values ('$invoice_no','$amount','$payment_mode','$ref_no','$payment_date')";
+//
+//                        $run_payment = mysqli_query($conn,);
+//
+//                        $update_customer_order = "update customer_orders set order_status='$complete' where order_id='$update_id'";
+//
+//                        $run_customer_order = mysqli_query($conn,$update_customer_order);
+//
+//                        $update_pending_order = "update pending_orders set order_status='$complete' where order_id='$update_id'";
+//
+//                        $run_pending_order = mysqli_query($conn,$update_pending_order);
+//
+//                        if($run_pending_order){
+//
+//                            echo "<script>alert('Thank You for purchasing, your orders will be completed within 24 hours work')</script>";
+//
+//                            echo "<script>window.open('my_account.php?my_orders','_self')</script>";
+//
+//                        }
+//
+//                    }
+//
+//                    ?>
 
                 </div><!-- box Finish -->
 
@@ -359,4 +351,4 @@ if(!isset($_SESSION['customer_email'])){
 
     </body>
     </html>
-<?php } ?>
+<?php //} ?>

@@ -1,7 +1,4 @@
-<?php
-$active = 'Home';
-include_once ('includes/header.php');
-?>
+<?php include_once 'includes/header.php' ?>
 
 <div class="container" id="slider"><!-- container Begin -->
 
@@ -22,6 +19,8 @@ include_once ('includes/header.php');
 
                 <?php
 
+                include_once 'includes/db.php';
+
                 $get_slides = "select * from slider LIMIT 0,1";
 
                 $run_slides = mysqli_query($conn,$get_slides);
@@ -35,7 +34,7 @@ include_once ('includes/header.php');
                        
                        <div class='item active'>
                        
-                       <img src='slides_images/$slide_image'>
+                       <img src='view/slides_images/$slide_image'>
                        
                        </div>
                        
@@ -56,7 +55,7 @@ include_once ('includes/header.php');
                        
                        <div class='item'>
                        
-                       <img src='slides_images/$slide_image'>
+                       <img src='view/slides_images/$slide_image'>
                        
                        </div>
                        
@@ -65,6 +64,7 @@ include_once ('includes/header.php');
                 }
 
                 ?>
+
 
             </div><!-- carousel-inner Finish -->
 
@@ -178,20 +178,202 @@ include_once ('includes/header.php');
 
     <div class="row"><!-- row Begin -->
 
-        <?php getPro(); ?>
+        <?php foreach ($array['$run_product'] as $run_product) { ?>
+
+        <div class="col-sm-4 col-sm-6 single"><!-- col-sm-4 col-sm-6 single Begin -->
+
+            <div class="product"><!-- product Begin -->
+
+                <a href="index.php?controller=detail&id=<?= $run_product['product_id'] ?>">
+
+                    <img class="img-responsive" src="view/product_images/<?= $run_product['product_img1'] ?>" alt="Product 1">
+
+                </a>
+
+                <div class="text"><!-- text Begin -->
+
+                    <h3>
+                        <a href="index.php?controller=detail&id=<?= $run_product['product_id'] ?>">
+                            <?= $run_product['product_title'] ?>
+                        </a>
+                    </h3>
+
+                    <p class="price"><?= number_format($run_product['product_price'], 0, ',', '.') ?></p>
+
+                    <p class="button">
+
+                        <a href="index.php?controller=detail&id=<?= $run_product['product_id'] ?>" class="btn btn-default">View Details</a>
+
+                        <a href="index.php?controller=cart&action=add_to_cart&product_id=<?= $run_product['product_id'] ?>" class="btn btn-primary">
+
+                            <i class="fa fa-shopping-cart">
+                                Add To Cart
+                            </i>
+
+                        </a>
+
+                    </p>
+
+                </div><!-- text Finish -->
+
+            </div><!-- product Finish -->
+
+        </div><!-- col-sm-4 col-sm-6 single Finish -->
+         <?php } ?>
 
     </div><!-- row Finish -->
 
 </div><!-- container Finish -->
 
-<?php
+<div id="footer"><!-- #footer Begin -->
+    <div class="container"><!-- container Begin -->
+        <div class="row"><!-- row Begin -->
+            <div class="col-sm-6 col-md-3"><!-- col-sm-6 col-md-3 Begin -->
 
-include("includes/footer.php");
+                <h4>Pages</h4>
 
-?>
+                <ul><!-- ul Begin -->
+                    <ul><!-- ul Begin -->
+                        <li><a href="cart.php">Shopping Cart</a></li>
+                        <li><a href="contact.php">Contact Us</a></li>
+                        <li><a href="shop.php">Shop</a></li>
+                        <li><a href="checkout.php">My Account</a></li>
+                    </ul><!-- ul Finish -->
 
-<script src="js/jquery-331.min.js"></script>
-<script src="js/bootstrap-337.min.js"></script>
+                    <hr>
+
+                    <h4>User Section</h4>
+
+                    <ul><!-- ul Begin -->
+                        <li>
+                            <?php
+
+                            if(!isset($_SESSION['customer_email'])){
+
+                                echo"<a href='index.php?controller=loginUser&action=login'>Login</a>";
+
+                            }else{
+
+                                echo"<a href='index.php?controller=myOrder'>My Account</a>";
+
+                            }
+
+                            ?>
+                        </li>
+                        <li>
+
+                            <?php
+
+                            if(!isset($_SESSION['customer_email'])){
+
+                                echo"<a href='index.php?controller=register&action=create'>Register</a>";
+
+                            }else{
+
+                                echo"<a href='my_account.php?edit_account'>Edit Account</a>";
+
+                            }
+
+                            ?>
+                </ul><!-- ul Finish -->
+
+                <hr class="hidden-md hidden-lg hidden-sm">
+
+            </div><!-- col-sm-6 col-md-3 Finish -->
+
+            <div class="com-sm-6 col-md-3"><!-- col-sm-6 col-md-3 Begin -->
+
+                <h4>Top Products Categories</h4>
+
+                <?php foreach ($array['$run_p_cat'] as $run_p_cat){ ?>
+                <ul><!-- ul Begin -->
+                    <li><a href="index.php?controller=shop&action=display&id=<?=$run_p_cat['p_cat_id'] ?>"><?= $run_p_cat['p_cat_title'] ?></a></li>
+
+                </ul><!-- ul Finish -->
+                <?php } ?>
+
+                <hr class="hidden-md hidden-lg">
+
+            </div><!-- col-sm-6 col-md-3 Finish -->
+
+            <div class="col-sm-6 col-md-3"><!-- col-sm-6 col-md-3 Begin -->
+
+                <h4>Find Us</h4>
+
+                <p><!-- p Start -->
+
+                    <strong>M-Dev Media inc.</strong>
+                    <br/>Cibubur
+                    <br/>Ciracas
+                    <br/>0818-0683-3157
+                    <br/>mugianto4th@gmail.com
+                    <br/><strong>MrGhie</strong>
+
+                </p><!-- p Finish -->
+
+                <a href="contact.php">Check Our Contact Page</a>
+
+                <hr class="hidden-md hidden-lg">
+
+            </div><!-- col-sm-6 col-md-3 Finish -->
+
+            <div class="col-sm-6 col-md-3">
+
+                <h4>Get The News</h4>
+
+                <p class="text-muted">
+                    Dont miss our latest update products.
+                </p>
+
+                <form action="" method="post"><!-- form begin -->
+                    <div class="input-group"><!-- input-group begin -->
+
+                        <input type="text" class="form-control" name="email">
+
+                        <span class="input-group-btn"><!-- input-group-btn begin -->
+
+                            <input type="submit" value="subscribe" class="btn btn-default">
+
+                        </span><!-- input-group-btn Finish -->
+
+                    </div><!-- input-group Finish -->
+                </form><!-- form Finish -->
+
+                <hr>
+
+                <h4>Keep In Touch</h4>
+
+                <p class="social">
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-google-plus"></a>
+                    <a href="#" class="fa fa-envelope"></a>
+                </p>
+
+            </div>
+        </div><!-- row Finish -->
+    </div><!-- container Finish -->
+</div><!-- #footer Finish -->
+
+
+<div id="copyright"><!-- #copyright Begin -->
+    <div class="container"><!-- container Begin -->
+        <div class="col-md-6"><!-- col-md-6 Begin -->
+
+            <p class="pull-left">&copy; 2018 M-Dev Store All Rights Reserve</p>
+
+        </div><!-- col-md-6 Finish -->
+        <div class="col-md-6"><!-- col-md-6 Begin -->
+
+            <p class="pull-right">Theme by: <a href="#">MrGhie</a></p>
+
+        </div><!-- col-md-6 Finish -->
+    </div><!-- container Finish -->
+</div><!-- #copyright Finish -->
+
+<script src="view/js/jquery-331.min.js"></script>
+<script src="view/js/bootstrap-337.min.js"></script>
 
 
 </body>

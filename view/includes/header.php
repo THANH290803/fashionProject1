@@ -1,55 +1,12 @@
-<?php
-session_start();
-include_once('../connect/openDB.php');
-include("../model/function.php");
-?>
-<?php
-if(isset($_GET['pro_id'])){
-
-    $product_id = $_GET['pro_id'];
-
-    $get_product = "select * from products where product_id='$product_id'";
-
-    $run_product = mysqli_query($conn,$get_product);
-
-    $row_product = mysqli_fetch_array($run_product);
-
-    $p_cat_id = $row_product['p_cat_id'];
-
-    $pro_title = $row_product['product_title'];
-
-    $pro_price = $row_product['product_price'];
-
-    $pro_desc = $row_product['product_desc'];
-
-    $pro_img1 = $row_product['product_img1'];
-
-    $pro_img2 = $row_product['product_img2'];
-
-    $pro_img3 = $row_product['product_img3'];
-
-    $get_p_cat = "select * from product_categories where p_cat_id='$p_cat_id'";
-
-    $run_p_cat = mysqli_query($conn,$get_p_cat);
-
-    $row_p_cat = mysqli_fetch_array($run_p_cat);
-
-    $p_cat_title = $row_p_cat['p_cat_title'];
-
-}
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>M-Dev Store</title>
-    <link rel="stylesheet" href="styles/bootstrap-337.min.css">
-    <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="view/styles/bootstrap-337.min.css">
+    <link rel="stylesheet" href="view/font-awsome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="view/styles/style.css">
 </head>
 <body>
 
@@ -58,24 +15,8 @@ if(isset($_GET['pro_id'])){
     <div class="container"><!-- container Begin -->
 
         <div class="col-md-6 offer"><!-- col-md-6 offer Begin -->
-            <a href="#" class="btn btn-success btn-sm">
 
-                <?php
-
-                if(!isset($_SESSION['customer_email'])){
-
-                    echo "Welcome: Guest";
-
-                }else{
-
-                    echo "Welcome: " . $_SESSION['customer_email'] . "";
-
-                }
-
-                ?>
-
-            </a>
-            <a href="checkout.php"><?php items(); ?> Items In Your Cart | Total Price: <?php total_price(); ?> </a>
+            <a href="index.php?controller=home" class="btn btn-success btn-sm">Welcome</a>
 
         </div><!-- col-md-6 offer Finish -->
 
@@ -84,32 +25,28 @@ if(isset($_GET['pro_id'])){
             <ul class="menu"><!-- cmenu Begin -->
 
                 <li>
-                    <a href="customer_register.php">Register</a>
+                    <a href="index.php?controller=register&action=create">Register</a>
                 </li>
                 <li>
-                    <a href="my_account.php">My Account</a>
+                    <a href="">My Account</a>
                 </li>
                 <li>
-                    <a href="cart.php">Go To Cart</a>
+                    <a href="index.php?controller=cart&action=view_cart">Go To Cart</a>
                 </li>
                 <li>
-                    <a href="../checkout.php">
+                    <?php
 
-                        <?php
+                    if(!isset($_SESSION['customer_email'])){
 
-                        if(!isset($_SESSION['customer_email'])){
+                        echo "<a href='index.php?controller=loginUser&action=login'> Login </a>";
 
-                            echo "<a href='checkout.php'> Login </a>";
+                    }else{
 
-                        }else{
+                        echo " <a href='index.php?controller=loginUser&action=logoutUser'> Log Out </a> ";
 
-                            echo " <a href='logout.php'> Log Out </a> ";
+                    }
 
-                        }
-
-                        ?>
-
-                    </a>
+                    ?>
                 </li>
 
             </ul><!-- menu Finish -->
@@ -126,10 +63,10 @@ if(isset($_GET['pro_id'])){
 
         <div class="navbar-header"><!-- navbar-header Begin -->
 
-            <a href="home.php" class="navbar-brand home"><!-- navbar-brand home Begin -->
+            <a href="index.php" class="navbar-brand home"><!-- navbar-brand home Begin -->
 
-                <img src="images/ecom-store-logo.png" alt="M-dev-Store Logo" class="hidden-xs">
-                <img src="images/ecom-store-logo-mobile.png" alt="M-dev-Store Logo Mobile" class="visible-xs">
+                <img src="view/images/tải_xuống-removebg-preview.png" alt="M-dev-Store Logo" class="hidden-xs">
+                <img src="view/images/tải_xuống-removebg-preview.png" alt="M-dev-Store Logo Mobile" class="visible-xs">
 
             </a><!-- navbar-brand home Finish -->
 
@@ -157,43 +94,31 @@ if(isset($_GET['pro_id'])){
 
                 <ul class="nav navbar-nav left"><!-- nav navbar-nav left Begin -->
 
-                    <li class="<?php if ($active == 'Home') echo "active"; ?>">
-                        <a href="home.php">Home</a>
+                    <li>
+                        <a href="index.php?controller=home">Home</a>
                     </li>
-                    <li class="<?php if ($active == 'Shop') echo "active"; ?>">
-                        <a href="shop.php">Shop</a>
+                    <li>
+                        <a href="index.php?controller=shop">Shop</a>
                     </li>
-                    <li class="<?php if ($active == 'Account') echo "active"; ?>">
-                        <?php
-
-                        if(!isset($_SESSION['customer_email'])){
-
-                            echo"<a href='checkout.php'>My Account</a>";
-
-                        }else{
-
-                            echo"<a href='my_account.php?my_orders'>My Account</a>";
-
-                        }
-
-                        ?>
+                    <li>
+                        <a href="index.php?controller=myOrder">My Account</a>
                     </li>
-                    <li class="<?php if ($active == 'Cart') echo "active"; ?>">
-                        <a href="cart.php">Shopping Cart</a>
+                    <li>
+                        <a href="index.php?controller=cart&action=view_cart">Shopping Cart</a>
                     </li>
-                    <li class="<?php if ($active == 'Contact') echo "active"; ?>">
-                        <a href="contact.php">Contact Us</a>
+                    <li>
+                        <a href="index.php?controller=contact">Contact Us</a>
                     </li>
 
                 </ul><!-- nav navbar-nav left Finish -->
 
             </div><!-- padding-nav Finish -->
 
-            <a href="cart.php" class="btn navbar-btn btn-primary right"><!-- btn navbar-btn btn-primary Begin -->
+            <a href="index.php?controller=cart&action=view_cart" class="btn navbar-btn btn-primary right"><!-- btn navbar-btn btn-primary Begin -->
 
                 <i class="fa fa-shopping-cart"></i>
 
-                <span><?php items(); ?> Items In Your Cart</span>
+                <span>Items In Your Cart</span>
 
             </a><!-- btn navbar-btn btn-primary Finish -->
 

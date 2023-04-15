@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="view/font-awsome/css/font-awesome.min.css">
     <link rel="stylesheet" href="view/styles/style1.css">
     <link rel="stylesheet" href="view/styles/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
 
@@ -36,7 +38,7 @@
 
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><!-- dropdown-toggle begin -->
 
-                    <i class="fa fa-user"></i> Mrghie <b class="caret"></b>
+                    <i class="fa fa-user"></i> <?= $_SESSION['admin_name'] ?> <b class="caret"></b>
 
                 </a><!-- dropdown-toggle finish -->
 
@@ -82,7 +84,7 @@
                     <li class="divider"></li>
 
                     <li><!-- li begin -->
-                        <a href="logout.php"><!-- a href begin -->
+                        <a href="index.php?controller=login&action=logout"><!-- a href begin -->
 
                             <i class="fa fa-fw fa-power-off"></i> Log Out
 
@@ -183,21 +185,34 @@
                 </li><!-- li finish -->
 
                 <li><!-- li begin -->
-                    <a href="index.php?view_customers"><!-- a href begin -->
+                    <a href="index.php?controller=customer"><!-- a href begin -->
                         <i class="fa fa-fw fa-users"></i> View Customers
                     </a><!-- a href finish -->
                 </li><!-- li finish -->
 
                 <li><!-- li begin -->
-                    <a href="index.php?view_orders"><!-- a href begin -->
+                    <a href="index.php?controller=order"><!-- a href begin -->
                         <i class="fa fa-fw fa-book"></i> View Orders
                     </a><!-- a href finish -->
                 </li><!-- li finish -->
 
                 <li><!-- li begin -->
-                    <a href="index.php?view_payments"><!-- a href begin -->
-                        <i class="fa fa-fw fa-money"></i> View Payments
+                    <a href="#" data-toggle="collapse" data-target="#payment"><!-- a href begin -->
+
+                        <i class="fa fa-fw fa-money"></i> Payment Method
+                        <i class="fa fa-fw fa-caret-down"></i>
+
                     </a><!-- a href finish -->
+
+                    <ul id="payment" class="collapse"><!-- collapse begin -->
+                        <li><!-- li begin -->
+                            <a href="index.php?controller=payment&action=create"> Insert Payment Method </a>
+                        </li><!-- li finish -->
+                        <li><!-- li begin -->
+                            <a href="index.php?controller=payment"> View Payment Method </a>
+                        </li><!-- li finish -->
+                    </ul><!-- collapse finish -->
+
                 </li><!-- li finish -->
 
                 <li><!-- li begin -->
@@ -223,7 +238,7 @@
                 </li><!-- li finish -->
 
                 <li><!-- li begin -->
-                    <a href="logout.php"><!-- a href begin -->
+                    <a href="index.php?controller=login&action=logout"><!-- a href begin -->
                         <i class="fa fa-fw fa-power-off"></i> Log Out
                     </a><!-- a href finish -->
                 </li><!-- li finish -->

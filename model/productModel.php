@@ -58,7 +58,7 @@
         move_uploaded_file($temp_name3, "view/product_images/$product_img3");
 
 
-        $date = $_POST['date'];
+        $date = date("Y-m-d");
         $product_price = $_POST['product_price'];
         $product_keywords = $_POST['product_keywords'];
         $product_desc = $_POST['product_desc'];
@@ -68,10 +68,12 @@
                 VALUES ('$p_cat_id', '$cat_id' , '$product_title', '$product_img1', '$product_img2', '$product_img3', '$date', '$product_price', '$product_keywords', '$product_desc')";
         $insert_product = mysqli_query($conn, $sql);
 
-        if ($insert_product){
-
-            echo "<script> alert('Product has been inserted sucessfully')</script>";
+        if (mysqli_affected_rows($conn) == 1) {
+            echo "Thêm sản phẩm thành công!";
+        } else {
+            echo "Thêm sản phẩm thất bại: " . mysqli_error($conn);
         }
+
         include_once('connect/closeDB.php');
 
     }

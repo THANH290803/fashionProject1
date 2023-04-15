@@ -1,221 +1,141 @@
-<?php
-    $active='Shop';
-    include_once ('includes/header.php');
-?>
+<?php include_once 'includes/header.php'?>
 
-   <div id="content"><!-- #content Begin -->
-       <div class="container"><!-- container Begin -->
-           <div class="col-md-12"><!-- col-md-12 Begin -->
+<div id="content"><!-- #content Begin -->
+    <div class="container"><!-- container Begin -->
+        <div class="col-md-12"><!-- col-md-12 Begin -->
 
-               <ul class="breadcrumb"><!-- breadcrumb Begin -->
-                   <li>
-                       <a href="home.php">Home</a>
-                   </li>
-                   <li>
-                       Shop
-                   </li>
-               </ul><!-- breadcrumb Finish -->
+            <ul class="breadcrumb"><!-- breadcrumb Begin -->
+                <li>
+                    <a href="index.php?controller=home">Home</a>
+                </li>
+                <li>
+                    Shop
+                </li>
+            </ul><!-- breadcrumb Finish -->
 
-           </div><!-- col-md-12 Finish -->
+        </div><!-- col-md-12 Finish -->
 
-           <div class="col-md-3"><!-- col-md-3 Begin -->
+        <div class="col-md-3"><!-- col-md-3 Begin -->
 
-               <?php
+            <div class="panel panel-default sidebar-menu"><!-- panel panel-default sidebar-menu Begin -->
+                <div class="panel-heading"><!-- panel-heading Begin -->
+                    <h3 class="panel-title">Products Categories</h3>
+                </div><!-- panel-heading Finish -->
 
-               include("includes/sidebar.php");
+                <div class="panel-body"><!-- panel-body Begin -->
+                    <ul class="nav nav-pills nav-stacked category-menu"><!-- nav nav-pills nav-stacked category-menu Begin -->
 
-               ?>
+                        <?php foreach ($array['$run_p_cat'] as $productCategories){ ?>
+                            <li><a href="index.php?controller=shop&action=display&id=<?=$productCategories['p_cat_id'] ?>"><?=$productCategories['p_cat_title'] ?></a></li>
 
-           </div><!-- col-md-3 Finish -->
+                        <?php } ?>
 
-           <div class="col-md-9"><!-- col-md-9 Begin -->
+                    </ul><!-- nav nav-pills nav-stacked category-menu Finish -->
+                </div><!-- panel-body Finish -->
 
-               <?php
+            </div><!-- panel panel-default sidebar-menu Finish -->
 
-               if(!isset($_GET['p_cat'])){
 
-                   if(!isset($_GET['cat'])){
+            <div class="panel panel-default sidebar-menu"><!-- panel panel-default sidebar-menu Begin -->
+                <div class="panel-heading"><!-- panel-heading Begin -->
+                    <h3 class="panel-title">Categories</h3>
+                </div><!-- panel-heading Finish -->
 
-                       echo "
+                <div class="panel-body"><!-- panel-body Begin -->
+                    <ul class="nav nav-pills nav-stacked category-menu"><!-- nav nav-pills nav-stacked category-menu Begin -->
 
-                       <div class='box'><!-- box Begin -->
-                           <h1>Shop</h1>
-                           <p>
-                               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo deleniti accusamus, consequuntur illum quasi ut. Voluptate a, ipsam repellendus ut fugiat minima? Id facilis itaque autem, officiis veritatis perferendis, quaerat!
-                           </p>
-                       </div><!-- box Finish -->
+                        <?php foreach ($array['$run_cat'] as $run_cat){ ?>
+                        <li><a href="index.php?controller=shop&action=new&id=<?=$run_cat['cat_id'] ?>"><?=$run_cat['cat_title'] ?></a></li>
 
-                       ";
+                        <?php } ?>
 
-                   }
+                    </ul><!-- nav nav-pills nav-stacked category-menu Finish -->
+                </div><!-- panel-body Finish -->
 
-               }
+            </div><!-- panel panel-default sidebar-menu Finish -->
 
-               ?>
+        </div><!-- col-md-3 Finish -->
 
-               <div class="row"><!-- row Begin -->
+        <div class="col-md-9"><!-- col-md-9 Begin -->
+            <div class="box"><!-- box Begin -->
+                <h1>Shop</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo deleniti accusamus, consequuntur illum quasi ut. Voluptate a, ipsam repellendus ut fugiat minima? Id facilis itaque autem, officiis veritatis perferendis, quaerat!
+                </p>
+            </div><!-- box Finish -->
 
-                   <?php
+            <div class="row"><!-- row Begin -->
 
-                   if(!isset($_GET['p_cat'])){
+                <?php foreach ($array['products'] as $product){ ?>
 
-                   if(!isset($_GET['cat'])){
+                <div class="col-md-4 col-sm-6 center-responsive"><!-- col-md-4 col-sm-6 center-responsive Begin -->
 
-                   $per_page=6;
+                    <div class="product"><!-- product Begin -->
 
-                   if(isset($_GET['page'])){
+                        <a href="index.php?controller=detail&id=<?= $product['product_id'] ?>">
 
-                       $page = $_GET['page'];
+                            <img class="img-responsive" src="view/product_images/<?= $product['product_img1'] ?>" alt="Product 1">
 
-                   }else{
+                        </a>
 
-                       $page=1;
+                        <div class="text"><!-- text Begin -->
 
-                   }
+                            <h3>
+                                <a href="index.php?controller=detail&id=<?= $product['product_id'] ?>">
+                                    <?= $product['product_title'] ?>
+                                </a>
+                            </h3>
 
-                   $start_from = ($page-1) * $per_page;
+                            <p class="price"><?= number_format($product['product_price'], 0, ',', '.') ?></p>
 
-                   $get_products = "select * from products order by 1 DESC LIMIT $start_from,$per_page";
+                            <p class="button">
 
-                   $run_products = mysqli_query($conn,$get_products);
+                                <a href="index.php?controller=detail&id=<?= $product['product_id'] ?>" class="btn btn-default">View Details</a>
 
-                   while($row_products=mysqli_fetch_array($run_products)){
+                                <a href="index.php?controller=cart&action=add_to_cart&product_id=<?= $product['product_id'] ?>" class="btn btn-primary">
 
-                       $pro_id = $row_products['product_id'];
+                                    <i class="fa fa-shopping-cart">
+                                        Add To Cart
+                                    </i>
 
-                       $pro_title = $row_products['product_title'];
+                                </a>
 
-                       $pro_price = $row_products['product_price'];
+                            </p>
 
-                       $pro_img1 = $row_products['product_img1'];
+                        </div><!-- text Finish -->
 
-                       echo "
-                                
-                                    <div class='col-md-4 col-sm-6 center-responsive'>
-                                    
-                                        <div class='product'>
-                                        
-                                            <a href='details.php?pro_id=$pro_id'>
-                                            
-                                                <img class='img-responsive' src='product_images/$pro_img1'>
-                                            
-                                            </a>
-                                            
-                                            <div class='text'>
-                                            
-                                                <h3>
-                                                
-                                                    <a href='details.php?pro_id=$pro_id'> $pro_title </a>
-                                                
-                                                </h3>
-                                            
-                                                <p class='price'>
+                    </div><!-- product Finish -->
 
-                                                    $pro_price VND
 
-                                                </p>
+                </div><!-- col-md-4 col-sm-6 center-responsive Finish -->
 
-                                                <p class='buttons'>
+                <?php } ?>
 
-                                                    <a class='btn btn-default' href='details.php?pro_id=$pro_id'>
+            </div><!-- row Finish -->
 
-                                                        View Details
+            <center>
+                <?php
+                for($i = 1; $i <= $array['page']; $i++){
+                    ?>
+                    <form class="pagination" method="post" action="index.php?controller=shop">
+                        <input type="hidden" name="search" value="<?= $array['search'] ?>">
+                        <input type="hidden" name="page" value="<?= $i ?>">
+                        <button class="active">
+                            <?= $i ?>
+                        </button>
+                    </form>
+                    <?php
+                }
+                ?>
+            </center>
 
-                                                    </a>
+        </div><!-- col-md-9 Finish -->
 
-                                                    <a class='btn btn-primary' href='details.php?pro_id=$pro_id'>
+    </div><!-- container Finish -->
+</div><!-- #content Finish -->
 
-                                                        <i class='fa fa-shopping-cart'></i> Add To Cart
+<?php include_once 'includes/footer.php'?>
 
-                                                    </a>
 
-                                                </p>
-                                            
-                                            </div>
-                                        
-                                        </div>
-                                    
-                                    </div>
-                                
-                                ";
-
-                   }
-
-                   ?>
-
-               </div><!-- row Finish -->
-
-               <center>
-                   <ul class="pagination"><!-- pagination Begin -->
-                       <?php
-
-                       $query = "select * from products";
-
-                       $result = mysqli_query($conn,$query);
-
-                       $total_records = mysqli_num_rows($result);
-
-                       $total_pages = ceil($total_records / $per_page);
-
-                       echo "
-                        
-                            <li>
-                            
-                                <a href='shop.php?page=1'> ".'First Page'." </a>
-                            
-                            </li>
-                        
-                        ";
-
-                       for($i=1; $i<=$total_pages; $i++){
-
-                           echo "
-                        
-                            <li>
-                            
-                                <a href='shop.php?page=".$i."'> ".$i." </a>
-                            
-                            </li>
-                        
-                        ";
-
-                       };
-
-                       echo "
-                        
-                            <li>
-                            
-                                <a href='shop.php?page=$total_pages'> ".'Last Page'." </a>
-                            
-                            </li>
-                        
-                        ";
-
-                       }
-
-                       }
-
-                       ?>
-
-                   </ul><!-- pagination Finish -->
-               </center>
-
-               <?php
-                getpcatpro();
-
-                getcatpro();
-               ?>
-
-           </div><!-- col-md-9 Finish -->
-
-       </div><!-- container Finish -->
-   </div><!-- #content Finish -->
-
-   <?php include_once 'includes/footer.php'?>
-    
-    <script src="js/jquery-331.min.js"></script>
-    <script src="js/bootstrap-337.min.js"></script>
-    
-    
 </body>
 </html>
